@@ -1,2 +1,38 @@
-<h1>Books#show</h1>
-<p>Find me in app/views/books/show.html.erb</p>
+<!--<h1>Books#show</h1>-->
+<!--<p>Find me in app/views/books/show.html.erb</p>-->
+
+<div class="container px-5 px-sm-0">
+  <div class="row">
+    <!--画面左側-->
+    <div class="col-md-3">
+
+      <%= render 'user_info', user: @user %>
+      <%= render 'new_book', book: @book %>
+
+    </div>
+
+    <!--画面右側-->
+    <div class="col-md-8 offset-md-1">
+      <h2>Book detail</h2>
+      <table class="table">
+        <tbody>
+          <tr>
+            <td>
+              <%= link_to user_path(@user) do%>
+                <%= image_tag @user.get_profile_image(50,50) %><br>
+                <%= @user.name %>
+              <% end %>
+            </td>
+
+            <td><%= link_to @book_detail.title, book_path(@book_detail) %></td>
+            <td><%= @book_detail.body %></td>
+            <% if @user == current_user %>
+              <td><%= link_to "Edit" ,edit_book_path(@book_detail), class:"btn btn-sm btn-success" %></td>
+              <td><%= link_to "Destroy" ,book_path(@book_detail), method: :delete, class:"btn btn-sm btn-danger" %></td>
+            <% end %>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
