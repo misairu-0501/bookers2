@@ -74,7 +74,13 @@
         </div>
       </nav>
     </header>
-    <%= yield %>
+    
+    <main>
+      <!--フラッシュメッセージをmain最上部に配置-->
+      <p class="text-success"><%= notice %></p>
+      <%= yield %>
+    </main>
+
     <footer>
       <div class="container mt-5">
         <div class="row">

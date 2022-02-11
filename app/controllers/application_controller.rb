@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  before_action :authenticate_user!, except: [:top, :about] #ログインしていない状態でのリダイレクト先をログイン画面に設定(topアクション、aboutアクションは除く)
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   # Sign up後の遷移先を設定
@@ -18,6 +19,7 @@ class ApplicationController < ActionController::Base
 
   protected
 
+  # ユーザー登録(sign_up)の際に、ユーザー名(name),メールアドレス(email)のデータ操作を許可しています。
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :email])
   end

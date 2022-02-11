@@ -17,9 +17,15 @@
 </table>
 
 <div class="row">
-  <!--ログインユーザの情報のみ編集できるようにcurrent_userに設定-->
-  <%= link_to edit_user_path(current_user), class: "btn btn-outline-secondary btn-block" do %>
-    <i class="fa-solid fa-user-gear"></i>
+  <!--ログイン者のページの場合は編集画面へ、そうでない場合はログイン者のページへ遷移-->
+  <% if user == current_user %>
+    <%= link_to edit_user_path(current_user), class: "btn btn-outline-secondary btn-block" do %>
+      <i class="fas fa-user-cog"></i>
+    <% end %>
+  <% else %>
+    <%= link_to user_path(current_user), class: "btn btn-outline-secondary btn-block" do %>
+      <i class="fas fa-user-cog"></i>
+    <% end %>
   <% end %>
 </div>
 
