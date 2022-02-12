@@ -30,8 +30,10 @@ class BooksController < ApplicationController
 
   def edit
     @book = Book.find(params[:id])
-    # 他人の投稿編集画面に遷移できないように設定(遷移先はindexビュー)
-    if @book.user != current_user
+    # 他人の投稿編集画面に遷移できないように設定(遷移先はブック一覧のビュー)
+    if @book.user == current_user
+      render "edit"
+    else
       redirect_to books_path
     end
   end

@@ -14,8 +14,10 @@ class UsersController < ApplicationController
   def edit
     @user = User.find(params[:id])
 
-    # 他人のユーザ情報編集ｇ面に遷移できないように設定(遷移先はindexビュー)
-    if @user != current_user
+    # 他人のユーザ情報編集画面に遷移できないように設定(遷移先はログインユーザーのビュー)
+    if @user == current_user
+      render "edit"
+    else
       redirect_to user_path(current_user)
     end
   end
